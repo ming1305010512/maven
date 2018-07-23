@@ -26,7 +26,7 @@ public class AccountEmailServiceImpl implements AccountEmailService {
             MimeMessageHelper msgHelper = new MimeMessageHelper(msg);
 
             msgHelper.setFrom(systemEmail);
-            msgHelper.setTo("kylinming.long@gmail.com");
+            msgHelper.setTo(to);
             msgHelper.setSubject(subject);
             //true指定为html类型
             msgHelper.setText(htmlText,true);
