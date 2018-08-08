@@ -1,0 +1,4 @@
+com\kyming\maven\account\persist\Account.class
+com\kyming\maven\account\persist\AccountPersistException.class
+com\kyming\maven\account\persist\AccountPersistService.class
+com\kyming\maven\account\persist\AccountPersistServiceImpl.class

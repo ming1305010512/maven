@@ -4,9 +4,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.kyming.maven.account</groupId>
+  <parent>
+    <groupId>com.kyming.maven.account</groupId>
+    <artifactId>account-parent</artifactId>
+    <version>v1.0.0.1</version>
+    <relativePath>../account-parent/pom.xml</relativePath>
+  </parent>
+
   <artifactId>account-email</artifactId>
-  <version>1.0-SNAPSHOT</version>
 
   <name>account-email</name>
   <!-- FIXME change it to the project's website -->
@@ -16,59 +21,94 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    <javax.mail.version>1.4.1</javax.mail.version>
+    <greenmail.version>1.3.1b</greenmail.version>
   </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <name>account Release Repository</name>
+      <url>http://39.107.117.74:8081/repository/java/</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>account SnapshotRepository</name>
+      <url>http://39.107.117.74:8081/repository/java/</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>2.5.6</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>2.5.6</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>2.5.6</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
-      <version>2.5.6</version>
     </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
-      <version>1.4.1</version>
+      <version>${javax.mail.version}</version>
     </dependency>
     <dependency>
       <groupId>com.icegreen</groupId>
       <artifactId>greenmail</artifactId>
-      <version>1.3.1b</version>
+      <version>${greenmail.version}</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.3</version>
+        <executions>
+          <execution>
+            <id>ant-validate</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>I'm bound to validate phase.</echo>
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>ant-verify</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>I'm bound to verify phase.</echo>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
